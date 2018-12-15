@@ -8,61 +8,10 @@
   <%#= button_tag :new_transaction, id: "btn-transaction", class: "btn btn-primary" %>
 </p>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Date of Transaction</th>
-      <th>Transaction Type</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bank_account.account_transactions.each do |t| %>
-      <tr>
-        <td><%= t.created_at %></td>
-        <td><%= t.transaction_type %></td>
-        <td><%= number_to_currency(t.amount, unit: "USD") %></td>
-      </tr>
-    <% end %>
-    <tr>
-      <th></th>
-      <th>Balance</th>
-      <th><%= number_to_currency(@bank_account.balance, unit: "USD ") %></th>
-    </tr>
-  </tbody>
-</table>
+<%= render 'transactions'  %>
+<%= render 'modal_transaction' %>
 
 <div id="parameters" data-bank-account-id="<%= @bank_account.id %>"></div>
-
-<div id="modal-transaction" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">New Transaction</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <label>Amount</label>
-            <%= text_field_tag :amount, 0.00, id: "input-amount", class: "form-control" %>
-          </div>
-          <div class="col-md-6">
-            <label>Transaction Type</label>
-            <%= select_tag :transaction_type, options_for_select(AccountTransaction::TRANSACTION_TYPES), id:
-                "select-transaction-type", class: "form-control" %>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="btn-save" type="button" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- **************************** JavaScript Section ************************************-->
 

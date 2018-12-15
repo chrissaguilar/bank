@@ -16,7 +16,7 @@ class Client < ApplicationRecord
   end
 
   def to_s
-    "#{last_name}, #{first_name}, #{middle_name}"
+    "#{last_name}, #{first_name} #{middle_name}"
   end
 
 end
