@@ -1,9 +1,16 @@
+<%= link_to "Home Page", root_path %>
+
 <h1>Bank Accounts</h1>
+<p>
+  <%= link_to "New Bank Account", new_bank_account_path, class: "btn btn-primary" %>
+</p>
+
 
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Account Number</th>
+      <th>Client</th>
       <th>Balance</th>
       <th>Actions</th>
     </tr>
@@ -12,9 +19,9 @@
     <% @bank_accounts.each do |bank_account| %>
       <tr>
         <td><%= bank_account.account_number %></td>
+        <td><%= bank_account.client %>
         <td><%= number_to_currency(bank_account.balance, unit: "USD") %></td>
         <td><%= link_to 'Show', bank_account_path(bank_account.id), class: "btn btn-primary" %></td>
-
       </tr>
     <% end %>
   </tbody>
