@@ -1,0 +1,13 @@
+= link_to clients_path do
+  Clients List
+
+%h1
+  Client: #{@client}
+  %small
+    #{@client.client_number}
+  %div
+    = link_to new_client_bank_account_path(@client.id), class: "btn btn-primary" do
+      New Bank Account
+    = link_to edit_client_path(@client), class: "btn btn-warning float-right" do
+      Edit Client
+= render partial: "bank_accounts", locals: { bank_accounts: @client.bank_accounts }

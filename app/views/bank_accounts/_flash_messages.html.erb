@@ -1,0 +1,38 @@
+<%# flash.each do |name, msg| %>
+<!--        <div class="alert alert-<%#= name %>">-->
+<%#= msg %>
+<!--        </div>-->
+<%# end %>
+
+<!-- Danger, Info, Warning, Success-->
+
+<% if flash[:danger] %>
+  <div id="closeAlert" class="alert alert-danger mt-2">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:danger] %>
+  </div>
+  <% elsif flash[:success] %>
+    <div id="successAlert" class="alert alert-success mt-2">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:success] %>
+    </div>
+  <% elsif flash[:warning] %>
+    <div class="alert alert-warning mt-2">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:warning] %>
+    </div>
+<% end %>
+
+<script>
+  $(document).ready(function () {
+      $('.alert').show('fade');
+
+      setTimeout(function () {
+          $('.alert').hide('fade');
+      }, 3000);
+  });
+</script>
+
+
+
+

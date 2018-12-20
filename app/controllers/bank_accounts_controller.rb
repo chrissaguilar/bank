@@ -11,6 +11,7 @@ class BankAccountsController < ApplicationController
     @bank_account = BankAccount.new(bank_account_params)
 
     if @bank_account.save
+      flash[:success] = "Bank Account successfully created"
       redirect_to bank_account_path(@bank_account.id)
     else
       render "new"
@@ -25,6 +26,7 @@ class BankAccountsController < ApplicationController
     @bank_account = BankAccount.find(params[:id])
 
     if @bank_account.update(bank_account_params)
+      flash[:warning] = "Account has been updated"
       redirect_to bank_account_path(@bank_account.id)
     else
       render "edit"
@@ -32,12 +34,16 @@ class BankAccountsController < ApplicationController
   end
 
   def destroy
-    @bank_account = BankAccount.find(params[:id])
-    if @bank_account.balance > 0
-      redirect_to bank_account_path(@bank_account.id)
+    bank_account = BankAccount.find(params[:id])
+    client = bank_account.client
+
+    if bank_account.balance > 0
+      flash[:danger] = "Cannot delete an account with a balance"
+      redirect_to bank_account_path(bank_account.id)
     else
-      @bank_account.destroy!
-      redirect_to bank_accounts_path
+      bank_account.destroy!
+      flash[:danger] = "Account has successfully been deleted"
+      redirect_to client_path(client)
     end
   end
 

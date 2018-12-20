@@ -1,6 +1,8 @@
 <%= link_to "Home Page", root_path %>
  |
 <%= link_to "Back to Bank Accounts", bank_accounts_path %>
+  |
+<%= link_to "Back to #{@bank_account.client}", client_path(@bank_account.client_id) %>
 
 <h1>Account Number: <%= @bank_account.account_number %>
   <small><%= @bank_account.client %>
@@ -16,6 +18,7 @@
 
 <%= render 'transactions'  %>
 <%= render 'modal_transaction' %>
+
 
 <div id="parameters" data-bank-account-id="<%= @bank_account.id %>"></div>
 

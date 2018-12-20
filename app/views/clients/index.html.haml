@@ -1,0 +1,9 @@
+= link_to root_path do
+  Home Page
+%h1
+  Clients Database
+
+= link_to new_client_path, class: "btn btn-primary mb-2" do
+  New Client
+
+= render partial: "list", locals: {clients: @clients }
